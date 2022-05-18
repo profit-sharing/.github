@@ -21,7 +21,7 @@ Our solution consists of some components that we briefly describe here, and then
 ### Config Box
 The Config box stores three values the **number of active tokens in the next epoch**, the **income checkpoint**, and the **income threshold**. Config Box is responsible for ticket creation and burning so it can track the active tokens. It uses one of the *locker Tokens* here to create a Ticket. The created Ticket can receive the income from the next checkpoint. The checkpoint is actually a number that increases each time an income distribution happens. We will discuss the distribution later.
 <p align="center">
-    <img src=images/LockingTx.png>
+    <img src=profile/images/LockingTx.png>
 </p>
 
 System income can be distributed if it hits the threshold. Since the distribution process imposes fees, we don't want that threshold to be that small. However, on the other side, we want to split the system income as soon as possible. Thus we should choose a reasonable threshold here. Then we chose this scenario for the income threshold:
@@ -34,7 +34,7 @@ As the system asset can be Erg or different token types, the threshold can be se
 ### Distribution Contract
 The Distribution Contract is responsible for distributing the system income between the stakeholders. It stores the **income checkpoint** and **staking portion** and receives the income along with the distribution setting in the funding transaction. This contract is distinguishable by its distribution token received from the config box. The Config Box checkpoint is incremented by one in this transaction, but other settings are protected.
 <p align="center">
-    <img src=images/FundingTx.png>
+    <img src=./images/FundingTx.png>
 </p>
 
 The received income consists of Erg and a token type (The Distribution Contract can distribute only one token type rather than the Erg). The number of the Ergs and tokens is dividable by the current active tokens of the system. We describe the distribution transaction later.
